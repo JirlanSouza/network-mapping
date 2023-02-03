@@ -26,4 +26,8 @@ public class AreaOrmEntity {
         this.id = area.getId();
         this.name = area.getName();
     }
+
+    public Area toArea() {
+        return new Area(this.id, this.name, null);
+    }
 }
