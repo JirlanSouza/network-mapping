@@ -1,8 +1,10 @@
-package com.networkMapping.installationLocation.resouces;
+package com.networkMapping.installationLocation.controllers;
 
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.validation.Valid;
+import javax.validation.Validator;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -18,13 +20,12 @@ import com.networkMapping.installationLocation.useCases.GetAreasUseCase;
 @Path("/areas")
 public class AreaResource {
 
-    final GetAreasUseCase getAreasUseCase;
-    final CreateAreaUseCase createAreaUseCase;
-
-    public AreaResource(GetAreasUseCase getAreasUseCase, CreateAreaUseCase createAreaUseCase) {
-        this.getAreasUseCase = getAreasUseCase;
-        this.createAreaUseCase = createAreaUseCase;
-    }
+    @Inject
+    GetAreasUseCase getAreasUseCase;
+    @Inject
+    CreateAreaUseCase createAreaUseCase;
+    @Inject
+    Validator validator;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -35,8 +36,8 @@ public class AreaResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Area createArea(@Valid CreateAreaDto createAraDto) throws Exception {
-        return createAreaUseCase.execute(createAraDto);
+    public Area createArea(@Valid CreateAreaDto createAreaDto) throws Exception {
+        return createAreaUseCase.execute(createAreaDto);
     }
 
 }

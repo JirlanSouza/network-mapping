@@ -1,0 +1,13 @@
+package com.networkMapping.shared.exceptions;
+
+public class AlreadyExistsEntityException extends RuntimeException {
+
+    public AlreadyExistsEntityException() {
+        super();
+    }
+
+    public AlreadyExistsEntityException(String message) {
+        super(message);
+    }
+
+}

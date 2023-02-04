@@ -5,8 +5,9 @@ import javax.transaction.Transactional;
 
 import com.networkMapping.installationLocation.domain.Area;
 import com.networkMapping.installationLocation.dtos.CreateAreaDto;
-import com.networkMapping.installationLocation.ormEntities.AreaOrmEntity;
+import com.networkMapping.installationLocation.models.AreaModel;
 import com.networkMapping.installationLocation.repositories.AreaRepository;
+import com.networkMapping.shared.exceptions.AlreadyExistsEntityException;
 
 @ApplicationScoped
 public class CreateAreaUseCase {
@@ -18,14 +19,15 @@ public class CreateAreaUseCase {
 
     @Transactional
     public Area execute(CreateAreaDto createAreaDto) throws Exception {
-        var existArea = areaRepository.existsByName(createAreaDto.getName());
+        var existsArea = areaRepository.existsByName(createAreaDto.name);
 
-        if (existArea) {
-            throw new Exception();
+        if (existsArea) {
+            throw new AlreadyExistsEntityException(
+                    String.format("area with name: %s alredy exists", createAreaDto.name));
         }
 
-        var area = new Area(createAreaDto.getName(), null);
-        var areaOrmEntity = new AreaOrmEntity(area);
+        var area = new Area(createAreaDto.name, null);
+        var areaOrmEntity = new AreaModel(area);
         areaRepository.persist(areaOrmEntity);
         return area;
     }

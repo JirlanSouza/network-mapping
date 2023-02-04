@@ -1,28 +1,30 @@
-package com.networkMapping.installationLocation.ormEntities;
+package com.networkMapping.installationLocation.models;
 
 import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import com.networkMapping.installationLocation.domain.Area;
 
 @Entity
-public class AreaOrmEntity {
+@Table(name = "area")
+public class AreaModel {
     @Id
     public UUID id;
 
     public String name;
 
-    public AreaOrmEntity() {
+    public AreaModel() {
     }
 
-    public AreaOrmEntity(UUID id, String name) {
+    public AreaModel(UUID id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public AreaOrmEntity(Area area) {
+    public AreaModel(Area area) {
         this.id = area.getId();
         this.name = area.getName();
     }
