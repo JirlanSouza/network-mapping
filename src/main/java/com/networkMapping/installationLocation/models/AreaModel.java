@@ -1,9 +1,12 @@
 package com.networkMapping.installationLocation.models;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.networkMapping.installationLocation.domain.Area;
@@ -15,6 +18,10 @@ public class AreaModel {
     public UUID id;
 
     public String name;
+
+    @OneToMany
+    @JoinColumn(name = "parent_id", referencedColumnName = "id")
+    public List<SubAreaModel> subAreas;
 
     public AreaModel() {
     }

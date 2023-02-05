@@ -1,19 +1,67 @@
--- This file allow to write SQL commands that will be emitted in test and dev.
+insert into area (id, name)
+values (
+        "6784f6d0-2d39-48f8-a357-7f9fae325cb9",
+        'AREA001'
+    );
 
--- The commands are commented as their support depends of the database
+insert into area (id, name)
+values (
+        "255fed83-2b8b-4b99-b62d-379e9e9cafdc",
+        'AREA002'
+    );
 
-insert into area (id, name) values(uuid(), 'AREA001');
+insert into area (id, name)
+values (
+        "561ea7c1-e635-4a3c-ab4a-74b601a46393",
+        'AREA003'
+    );
 
-insert into area (id, name) values(uuid(), 'AREA002');
+insert into area (id, name)
+values (
+        "5289c641-0173-48a3-8e24-d2564020c9d6",
+        'AREA004'
+    );
 
-insert into area (id, name) values(uuid(), 'AREA003');
+insert into area (id, name)
+values (
+        "4dd17de3-8dbc-4768-be1c-09c8535220dc",
+        'AREA005'
+    );
 
-insert into area (id, name) values(uuid(), 'AREA004');
+insert into area (id, name)
+values (
+        "281d9026-f555-41bd-bb0b-1d9157e71024",
+        'AREA006'
+    );
 
-insert into area (id, name) values(uuid(), 'AREA005');
+insert into
+    sub_area (id, name, parent_id)
+values (
+        uuid(),
+        "SUB_AREA001",
+        "281d9026-f555-41bd-bb0b-1d9157e71024"
+    );
 
-insert into area (id, name) values(uuid(), 'AREA006');
+insert into
+    sub_area (id, name, parent_id)
+values (
+        uuid(),
+        "SUB_AREA002",
+        "281d9026-f555-41bd-bb0b-1d9157e71024"
+    );
 
--- insert into myentity (id, field) values(nextval('hibernate_sequence'), 'field-2');
+insert into
+    sub_area (id, name, parent_id)
+values (
+        uuid(),
+        "SUB_AREA003",
+        "281d9026-f555-41bd-bb0b-1d9157e71024"
+    );
 
--- insert into myentity (id, field) values(nextval('hibernate_sequence'), 'field-3');
+insert into
+    sub_area (id, name, parent_id)
+values (
+        uuid(),
+        "SUB_AREA004",
+        "281d9026-f555-41bd-bb0b-1d9157e71024"
+    );
