@@ -7,9 +7,10 @@ public class SubArea {
     private String name;
     private UUID parentId;
 
-    public SubArea(String name) {
+    public SubArea(String name, UUID parentId) {
         this.id = UUID.randomUUID();
         this.name = name;
+        this.parentId = parentId;
     }
 
     public SubArea(UUID id, String name, UUID parentId) {

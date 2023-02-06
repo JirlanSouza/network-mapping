@@ -16,7 +16,10 @@ import javax.ws.rs.core.MediaType;
 import com.networkMapping.installationLocation.domain.Area;
 import com.networkMapping.installationLocation.domain.SubArea;
 import com.networkMapping.installationLocation.dtos.CreateAreaDto;
+import com.networkMapping.installationLocation.dtos.CreateSubAreaDto;
+import com.networkMapping.installationLocation.dtos.CreateSubAreaUseCaseDto;
 import com.networkMapping.installationLocation.useCases.CreateAreaUseCase;
+import com.networkMapping.installationLocation.useCases.CreateSubAreaUseCase;
 import com.networkMapping.installationLocation.useCases.GetAreasUseCase;
 import com.networkMapping.installationLocation.useCases.GetSubAreasByParentIdUseCase;
 
@@ -29,6 +32,8 @@ public class AreaResource {
     CreateAreaUseCase createAreaUseCase;
     @Inject
     GetSubAreasByParentIdUseCase getSubAreasByParentIdUseCase;
+    @Inject
+    CreateSubAreaUseCase createSubAreaUseCase;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -45,9 +50,17 @@ public class AreaResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/{id}")
+    @Path("/{id}/sub-areas")
     public List<SubArea> GetSubAreasByParentId(@PathParam("id") UUID areaId) throws Exception {
         return getSubAreasByParentIdUseCase.execute(areaId);
+    }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/{id}/sub-areas")
+    public SubArea creatSubArea(@PathParam("id") UUID id, @Valid CreateSubAreaDto createSubAreaDto) {
+        return createSubAreaUseCase.execute(new CreateSubAreaUseCaseDto(createSubAreaDto.name, id));
     }
 
 }
