@@ -15,7 +15,7 @@ import com.networkMapping.installationLocation.domain.Area;
 @Table(name = "area")
 public class AreaModel {
     @Id
-    public UUID id;
+    public String id;
 
     public String name;
 
@@ -27,16 +27,16 @@ public class AreaModel {
     }
 
     public AreaModel(UUID id, String name) {
-        this.id = id;
+        this.id = id.toString();
         this.name = name;
     }
 
     public AreaModel(Area area) {
-        this.id = area.getId();
+        this.id = area.getId().toString();
         this.name = area.getName();
     }
 
     public Area toArea() {
-        return new Area(this.id, this.name, null);
+        return new Area(UUID.fromString(this.id), this.name, null);
     }
 }

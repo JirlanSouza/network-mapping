@@ -13,11 +13,11 @@ import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 @ApplicationScoped
 public class SubAreasRepository implements PanacheRepositoryBase<SubAreaModel, UUID> {
     public List<SubArea> findByParentId(UUID parentId) {
-        var subAreasModels = find("parent_id", parentId);
+        var subAreasModels = find("parent_id", parentId.toString());
         return subAreasModels.stream().map(this::toSubArea).toList();
     }
 
     private SubArea toSubArea(SubAreaModel model) {
-        return new SubArea(model.id, model.name, model.parentId);
+        return new SubArea(UUID.fromString(model.id), model.name, UUID.fromString(model.parentId));
     }
 }
