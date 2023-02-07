@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -24,10 +25,13 @@ import com.networkMapping.installationLocation.domain.SubArea;
 import com.networkMapping.installationLocation.dtos.CreateAreaDto;
 import com.networkMapping.installationLocation.dtos.CreateSubAreaDto;
 import com.networkMapping.installationLocation.dtos.CreateSubAreaUseCaseDto;
+import com.networkMapping.installationLocation.dtos.UpdateAreaRequestDto;
 import com.networkMapping.installationLocation.useCases.CreateAreaUseCase;
 import com.networkMapping.installationLocation.useCases.CreateSubAreaUseCase;
 import com.networkMapping.installationLocation.useCases.GetAreasUseCase;
 import com.networkMapping.installationLocation.useCases.GetSubAreasByParentIdUseCase;
+import com.networkMapping.installationLocation.useCases.UpdateAreaUseCase;
+import com.networkMapping.installationLocation.useCases.dtos.UpdateAreaDto;
 
 @Path("/areas")
 public class AreaResource {
@@ -36,6 +40,8 @@ public class AreaResource {
     GetAreasUseCase getAreasUseCase;
     @Inject
     CreateAreaUseCase createAreaUseCase;
+    @Inject
+    UpdateAreaUseCase updateAreaUseCase;
     @Inject
     GetSubAreasByParentIdUseCase getSubAreasByParentIdUseCase;
     @Inject
@@ -57,6 +63,14 @@ public class AreaResource {
 
     public Area createArea(@Valid CreateAreaDto createAreaDto) throws Exception {
         return createAreaUseCase.execute(createAreaDto);
+    }
+
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/{id}")
+    public Area updateArea(@PathParam("id") UUID id, @Valid UpdateAreaRequestDto updateAreaRequestDto) {
+        return updateAreaUseCase.execute(new UpdateAreaDto(id, updateAreaRequestDto.name));
     }
 
     @GET

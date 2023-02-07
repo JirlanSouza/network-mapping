@@ -6,6 +6,7 @@ import java.util.UUID;
 public class Area {
     private UUID id;
     private String name;
+
     private List<SubArea> subAreas;
 
     public Area(String name, List<SubArea> subAreas) {
@@ -26,6 +27,10 @@ public class Area {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<SubArea> getSubAreas() {
