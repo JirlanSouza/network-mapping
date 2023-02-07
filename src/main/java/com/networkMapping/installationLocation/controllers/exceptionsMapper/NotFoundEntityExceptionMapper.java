@@ -12,7 +12,7 @@ public class NotFoundEntityExceptionMapper implements ExceptionMapper<NotFoundEn
 
     @Override
     public Response toResponse(NotFoundEntityException exception) {
-        var responseError = new HttpResponseError("Not found", exception.getMessage());
+        var responseError = new HttpMessageError("Not found", exception.getMessage());
         return Response.status(Status.NOT_FOUND).entity(responseError).build();
     }
 

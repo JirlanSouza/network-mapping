@@ -13,6 +13,12 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
+
+import com.networkMapping.installationLocation.controllers.exceptionsMapper.HttpMessageError;
 import com.networkMapping.installationLocation.domain.Area;
 import com.networkMapping.installationLocation.domain.SubArea;
 import com.networkMapping.installationLocation.dtos.CreateAreaDto;
@@ -44,6 +50,11 @@ public class AreaResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
+    @APIResponses({
+            @APIResponse(responseCode = "201", description = "Created", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = Area.class))),
+            @APIResponse(responseCode = "500", description = "Internal server error", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = HttpMessageError.class)))
+    })
+
     public Area createArea(@Valid CreateAreaDto createAreaDto) throws Exception {
         return createAreaUseCase.execute(createAreaDto);
     }

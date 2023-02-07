@@ -12,7 +12,7 @@ public class AlredyExistsEntityExceptionMapper implements ExceptionMapper<Alread
 
     @Override
     public Response toResponse(AlreadyExistsEntityException exception) {
-        var responseError = new HttpResponseError("Conflict", exception.getMessage());
+        var responseError = new HttpMessageError("Conflict", exception.getMessage());
         return Response.status(Status.CONFLICT).entity(responseError).build();
     }
 

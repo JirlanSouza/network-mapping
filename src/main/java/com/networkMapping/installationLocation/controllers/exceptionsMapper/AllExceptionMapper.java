@@ -10,7 +10,7 @@ public class AllExceptionMapper implements ExceptionMapper<Exception> {
 
     @Override
     public Response toResponse(Exception exception) {
-        var responseError = new HttpResponseError("Internal server error", exception.getMessage());
+        var responseError = new HttpMessageError("Internal server error", exception.getMessage());
         return Response.status(Status.INTERNAL_SERVER_ERROR).entity(responseError).build();
     }
 
