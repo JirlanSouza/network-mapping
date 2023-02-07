@@ -5,7 +5,6 @@ import javax.transaction.Transactional;
 
 import com.networkMapping.installationLocation.domain.Area;
 import com.networkMapping.installationLocation.dtos.CreateAreaDto;
-import com.networkMapping.installationLocation.models.AreaModel;
 import com.networkMapping.installationLocation.repositories.AreaRepository;
 import com.networkMapping.shared.exceptions.AlreadyExistsEntityException;
 
@@ -27,8 +26,7 @@ public class CreateAreaUseCase {
         }
 
         var area = new Area(createAreaDto.name, null);
-        var areaOrmEntity = new AreaModel(area);
-        areaRepository.persist(areaOrmEntity);
+        areaRepository.save(area);
         return area;
     }
 }
