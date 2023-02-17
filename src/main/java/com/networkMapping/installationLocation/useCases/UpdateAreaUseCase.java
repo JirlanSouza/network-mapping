@@ -1,34 +1,29 @@
 package com.networkMapping.installationLocation.useCases;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.transaction.Transactional;
-
 import com.networkMapping.installationLocation.domain.Area;
-import com.networkMapping.installationLocation.repositories.AreaRepository;
+import com.networkMapping.installationLocation.repositories.AreaRepositoryJPA;
 import com.networkMapping.installationLocation.useCases.dtos.UpdateAreaDto;
 import com.networkMapping.shared.exceptions.NotFoundEntityException;
+import org.springframework.stereotype.Service;
 
-@ApplicationScoped
+@Service
 public class UpdateAreaUseCase {
-    private final AreaRepository areaRepository;
+    private final AreaRepositoryJPA areaRepository;
 
-    public UpdateAreaUseCase(AreaRepository areaRepository) {
+    public UpdateAreaUseCase(AreaRepositoryJPA areaRepository) {
         this.areaRepository = areaRepository;
     }
 
-    @Transactional
     public Area execute(UpdateAreaDto updateAreaDto) {
-        var existsArea = areaRepository.exists(updateAreaDto.id());
+        var area = areaRepository.findById(updateAreaDto.id())
+            .orElseThrow( () ->
+                new NotFoundEntityException(String.format("the area with id: %s does not exists", updateAreaDto.id())
+            ));
 
-        if (!existsArea) {
-            throw new NotFoundEntityException(
-                    String.format("the area with id: %s does not exists", updateAreaDto.id()));
-        }
 
-        var area = areaRepository.get(updateAreaDto.id());
-        area.setName(updateAreaDto.name());
+        area.name = updateAreaDto.name();
         areaRepository.save(area);
 
-        return area;
+        return new Area(area.id, area.name, null);
     }
 }

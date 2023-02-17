@@ -1,20 +1,22 @@
 package com.networkMapping.installationLocation.useCases;
 
+import com.networkMapping.installationLocation.domain.SubArea;
+import com.networkMapping.installationLocation.useCases.repositories.SubAreaRepository;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.UUID;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-
-import com.networkMapping.installationLocation.domain.SubArea;
-import com.networkMapping.installationLocation.repositories.SubAreasRepository;
-
-@ApplicationScoped
+@Service
 public class GetSubAreasByParentIdUseCase {
-    @Inject
-    SubAreasRepository subAreasRepository;
+
+    private final SubAreaRepository subAreaRepository;
+
+    public GetSubAreasByParentIdUseCase(SubAreaRepository subAreaRepository) {
+        this.subAreaRepository = subAreaRepository;
+    }
 
     public List<SubArea> execute(UUID parentId) throws RuntimeException {
-        return subAreasRepository.findByParentId(parentId);
+        return subAreaRepository.findByParentId(parentId);
     }
 }

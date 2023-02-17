@@ -1,22 +1,24 @@
 package com.networkMapping.installationLocation.useCases;
 
-import java.util.List;
-
-import javax.enterprise.context.ApplicationScoped;
-
 import com.networkMapping.installationLocation.domain.Area;
-import com.networkMapping.installationLocation.repositories.AreaRepository;
+import com.networkMapping.installationLocation.models.AreaModel;
+import com.networkMapping.installationLocation.repositories.AreaRepositoryJPA;
+import org.springframework.stereotype.Service;
 
-@ApplicationScoped
+import java.util.List;
+import java.util.stream.StreamSupport;
+
+@Service
 public class GetAreasUseCase {
-    final AreaRepository areaRepository;
+    final AreaRepositoryJPA areaRepository;
 
-    public GetAreasUseCase(AreaRepository areaRepository) {
+    public GetAreasUseCase(AreaRepositoryJPA areaRepository) {
         this.areaRepository = areaRepository;
     }
 
     public List<Area> execute() {
-        var areas = areaRepository.findAll().stream().map(areaOrmEntity -> areaOrmEntity.toArea()).toList();
-        return areas;
+        return StreamSupport.stream(areaRepository.findAll().spliterator(), false)
+            .map(AreaModel::toArea)
+            .toList();
     }
 }
