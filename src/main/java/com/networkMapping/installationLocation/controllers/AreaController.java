@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@RestController("areas")
+@RestController(value = "areas")
+@RequestMapping("/areas")
 public class AreaController {
 
     final

@@ -17,7 +17,7 @@ public class AreaRepositoryImpl implements AreaRepository {
 
     @Override
     public boolean existsByName(String name) {
-        return areaRepositoryJPA.countByName(name) > 0;
+        return areaRepositoryJPA.existsByName(name);
     }
 
     @Override
@@ -27,6 +27,6 @@ public class AreaRepositoryImpl implements AreaRepository {
 
     @Override
     public boolean exists(UUID id) {
-        return areaRepositoryJPA.countById(id) > 0;
+        return areaRepositoryJPA.existsById(id);
     }
 }

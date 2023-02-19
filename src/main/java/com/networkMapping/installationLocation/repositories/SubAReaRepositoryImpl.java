@@ -27,7 +27,7 @@ public class SubAReaRepositoryImpl implements SubAreaRepository {
 
     @Override
     public boolean existsByName(String name) {
-        return subAreaRepositoryJPA.countByName(name) > 0;
+        return subAreaRepositoryJPA.existsByName(name);
     }
 
     @Override
