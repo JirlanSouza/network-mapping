@@ -21,7 +21,7 @@ public class SubAReaRepositoryImpl implements SubAreaRepository {
     public List<SubArea> findByParentId(UUID parentId) {
         return subAreaRepositoryJPA.findByParentId(parentId)
             .stream()
-            .map(this::modelToEntity)
+            .map(SubAreaModel::toSubArea)
             .toList();
     }
 
@@ -33,9 +33,5 @@ public class SubAReaRepositoryImpl implements SubAreaRepository {
     @Override
     public void save(SubArea subArea) {
         subAreaRepositoryJPA.save(new SubAreaModel(subArea));
-    }
-
-    private SubArea modelToEntity(SubAreaModel model) {
-        return new SubArea(model.id, model.name, model.parentId);
     }
 }

@@ -27,4 +27,8 @@ public class SubAreaModel {
         this.name = subArea.getName();
         this.parentId = subArea.getParentId();
     }
+
+    public SubArea toSubArea() {
+        return new SubArea(id, name, parentId);
+    }
 }

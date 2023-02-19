@@ -5,6 +5,7 @@ import com.networkMapping.installationLocation.models.AreaModel;
 import com.networkMapping.installationLocation.useCases.repositories.AreaRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Component
@@ -28,5 +29,10 @@ public class AreaRepositoryImpl implements AreaRepository {
     @Override
     public boolean exists(UUID id) {
         return areaRepositoryJPA.existsById(id);
+    }
+
+    @Override
+    public Optional<Area> findById(UUID id) {
+        return areaRepositoryJPA.findById(id).map(AreaModel::toArea);
     }
 }

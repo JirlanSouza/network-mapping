@@ -32,6 +32,6 @@ public class AreaModel {
     }
 
     public Area toArea() {
-        return new Area(this.id, this.name, null);
+        return new Area(id, name, subAreas.stream().map(SubAreaModel::toSubArea).toList());
     }
 }
