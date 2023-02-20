@@ -8,6 +8,9 @@ import com.networkMapping.installationLocation.dtos.CreateSubAreaUseCaseDto;
 import com.networkMapping.installationLocation.dtos.UpdateAreaRequestDto;
 import com.networkMapping.installationLocation.useCases.*;
 import com.networkMapping.installationLocation.useCases.dtos.UpdateAreaDto;
+import com.networkMapping.installationLocation.useCases.presenters.AreaDataPresenter;
+import com.networkMapping.installationLocation.useCases.presenters.SubAreaDataOverviewPresenter;
+import com.networkMapping.installationLocation.useCases.repositories.GetAreaUseCase;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,35 +19,40 @@ import java.util.UUID;
 @RestController(value = "areas")
 @RequestMapping("/areas")
 public class AreaController {
-
-    final
-    GetAreasUseCase getAreasUseCase;
-    final
-    CreateAreaUseCase createAreaUseCase;
-    final
-    UpdateAreaUseCase updateAreaUseCase;
-    final
-    GetSubAreasByParentIdUseCase getSubAreasByParentIdUseCase;
-    final
-    CreateSubAreaUseCase createSubAreaUseCase;
+    private final GetAreaUseCase getAreaUseCase;
+    private final GetAreasUseCase getAreasUseCase;
+    private final CreateAreaUseCase createAreaUseCase;
+    private final UpdateAreaUseCase updateAreaUseCase;
+    private final GetSubAreasByParentIdUseCase getSubAreasByParentIdUseCase;
+    private final GetSubAreaUseCase getSubAreaUseCase;
+    private final CreateSubAreaUseCase createSubAreaUseCase;
 
     public AreaController(
+        GetAreaUseCase getAreaUseCase,
         GetAreasUseCase getAreasUseCase,
         CreateAreaUseCase createAreaUseCase,
         UpdateAreaUseCase updateAreaUseCase,
         GetSubAreasByParentIdUseCase getSubAreasByParentIdUseCase,
+        GetSubAreaUseCase getSubAreaUseCase,
         CreateSubAreaUseCase createSubAreaUseCase
     ) {
+        this.getAreaUseCase = getAreaUseCase;
         this.getAreasUseCase = getAreasUseCase;
         this.createAreaUseCase = createAreaUseCase;
         this.updateAreaUseCase = updateAreaUseCase;
         this.getSubAreasByParentIdUseCase = getSubAreasByParentIdUseCase;
+        this.getSubAreaUseCase = getSubAreaUseCase;
         this.createSubAreaUseCase = createSubAreaUseCase;
     }
 
     @GetMapping
-    public List<Area> getAreas() {
+    public List<AreaDataPresenter> getAreas() {
         return getAreasUseCase.execute();
+    }
+
+    @GetMapping("/{id}")
+    public AreaDataPresenter getArea(@PathVariable("id") UUID id) {
+        return getAreaUseCase.execute(id);
     }
 
     @PostMapping
@@ -58,13 +66,17 @@ public class AreaController {
     }
 
     @GetMapping("/{id}/sub-areas")
-    public List<SubArea> GetSubAreasByParentId(@PathVariable("id") UUID areaId) throws RuntimeException {
+    public List<SubAreaDataOverviewPresenter> GetSubAreasByParentId(@PathVariable("id") UUID areaId) throws RuntimeException {
         return getSubAreasByParentIdUseCase.execute(areaId);
+    }
+
+    @GetMapping("/sub-areas/{id}")
+    public SubAreaDataOverviewPresenter getSubArea(@PathVariable("id") UUID id) {
+        return getSubAreaUseCase.execute(id);
     }
 
     @PostMapping("/{id}/sub-areas")
     public SubArea creatSubArea(@PathVariable("id") UUID id, CreateSubAreaDto createSubAreaDto) {
         return createSubAreaUseCase.execute(new CreateSubAreaUseCaseDto(createSubAreaDto.name, id));
     }
-
 }

@@ -2,13 +2,16 @@ package com.networkMapping.installationLocation.repositories;
 
 import com.networkMapping.installationLocation.domain.SubArea;
 import com.networkMapping.installationLocation.models.SubAreaModel;
+import com.networkMapping.installationLocation.repositories.mappers.SubAreaModelMapper;
+import com.networkMapping.installationLocation.useCases.presenters.SubAreaDataOverviewPresenter;
 import com.networkMapping.installationLocation.useCases.repositories.SubAreaRepository;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
-@Component
+@Repository
 public class SubAReaRepositoryImpl implements SubAreaRepository {
 
     private final SubAreaRepositoryJPA subAreaRepositoryJPA;
@@ -18,10 +21,10 @@ public class SubAReaRepositoryImpl implements SubAreaRepository {
     }
 
     @Override
-    public List<SubArea> findByParentId(UUID parentId) {
+    public List<SubAreaDataOverviewPresenter> findByParentId(UUID parentId) {
         return subAreaRepositoryJPA.findByParentId(parentId)
             .stream()
-            .map(SubAreaModel::toSubArea)
+            .map(SubAreaModelMapper::toOverviewPresenter)
             .toList();
     }
 
@@ -33,5 +36,10 @@ public class SubAReaRepositoryImpl implements SubAreaRepository {
     @Override
     public void save(SubArea subArea) {
         subAreaRepositoryJPA.save(new SubAreaModel(subArea));
+    }
+
+    @Override
+    public Optional<SubAreaDataOverviewPresenter> getSubAreaData(UUID id) {
+        return subAreaRepositoryJPA.findById(id).map(SubAreaModelMapper::toOverviewPresenter);
     }
 }
