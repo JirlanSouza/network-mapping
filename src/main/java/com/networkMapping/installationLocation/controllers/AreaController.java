@@ -9,8 +9,8 @@ import com.networkMapping.installationLocation.dtos.UpdateAreaRequestDto;
 import com.networkMapping.installationLocation.useCases.*;
 import com.networkMapping.installationLocation.useCases.dtos.UpdateAreaDto;
 import com.networkMapping.installationLocation.useCases.presenters.AreaDataPresenter;
-import com.networkMapping.installationLocation.useCases.presenters.SubAreaDataOverviewPresenter;
-import com.networkMapping.installationLocation.useCases.repositories.GetAreaUseCase;
+import com.networkMapping.installationLocation.useCases.presenters.SubAreaDataPresenter;
+import com.networkMapping.installationLocation.useCases.GetAreaUseCase;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -66,12 +66,12 @@ public class AreaController {
     }
 
     @GetMapping("/{id}/sub-areas")
-    public List<SubAreaDataOverviewPresenter> GetSubAreasByParentId(@PathVariable("id") UUID areaId) throws RuntimeException {
+    public List<SubAreaDataPresenter> GetSubAreasByParentId(@PathVariable("id") UUID areaId) throws RuntimeException {
         return getSubAreasByParentIdUseCase.execute(areaId);
     }
 
     @GetMapping("/sub-areas/{id}")
-    public SubAreaDataOverviewPresenter getSubArea(@PathVariable("id") UUID id) {
+    public SubAreaDataPresenter getSubArea(@PathVariable("id") UUID id) {
         return getSubAreaUseCase.execute(id);
     }
 

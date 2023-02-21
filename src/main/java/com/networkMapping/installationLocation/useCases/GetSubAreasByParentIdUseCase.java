@@ -1,7 +1,6 @@
 package com.networkMapping.installationLocation.useCases;
 
-import com.networkMapping.installationLocation.domain.SubArea;
-import com.networkMapping.installationLocation.useCases.presenters.SubAreaDataOverviewPresenter;
+import com.networkMapping.installationLocation.useCases.presenters.SubAreaDataPresenter;
 import com.networkMapping.installationLocation.useCases.repositories.SubAreaRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +16,7 @@ public class GetSubAreasByParentIdUseCase {
         this.subAreaRepository = subAreaRepository;
     }
 
-    public List<SubAreaDataOverviewPresenter> execute(UUID parentId) throws RuntimeException {
+    public List<SubAreaDataPresenter> execute(UUID parentId) throws RuntimeException {
         return subAreaRepository.findByParentId(parentId);
     }
 }

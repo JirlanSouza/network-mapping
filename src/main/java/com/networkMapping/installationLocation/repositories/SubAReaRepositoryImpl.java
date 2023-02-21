@@ -3,7 +3,7 @@ package com.networkMapping.installationLocation.repositories;
 import com.networkMapping.installationLocation.domain.SubArea;
 import com.networkMapping.installationLocation.models.SubAreaModel;
 import com.networkMapping.installationLocation.repositories.mappers.SubAreaModelMapper;
-import com.networkMapping.installationLocation.useCases.presenters.SubAreaDataOverviewPresenter;
+import com.networkMapping.installationLocation.useCases.presenters.SubAreaDataPresenter;
 import com.networkMapping.installationLocation.useCases.repositories.SubAreaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +21,7 @@ public class SubAReaRepositoryImpl implements SubAreaRepository {
     }
 
     @Override
-    public List<SubAreaDataOverviewPresenter> findByParentId(UUID parentId) {
+    public List<SubAreaDataPresenter> findByParentId(UUID parentId) {
         return subAreaRepositoryJPA.findByParentId(parentId)
             .stream()
             .map(SubAreaModelMapper::toOverviewPresenter)
@@ -39,7 +39,7 @@ public class SubAReaRepositoryImpl implements SubAreaRepository {
     }
 
     @Override
-    public Optional<SubAreaDataOverviewPresenter> getSubAreaData(UUID id) {
+    public Optional<SubAreaDataPresenter> getSubAreaData(UUID id) {
         return subAreaRepositoryJPA.findById(id).map(SubAreaModelMapper::toOverviewPresenter);
     }
 }

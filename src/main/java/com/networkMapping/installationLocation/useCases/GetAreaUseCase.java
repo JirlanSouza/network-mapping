@@ -1,6 +1,7 @@
-package com.networkMapping.installationLocation.useCases.repositories;
+package com.networkMapping.installationLocation.useCases;
 
 import com.networkMapping.installationLocation.useCases.presenters.AreaDataPresenter;
+import com.networkMapping.installationLocation.useCases.repositories.AreaRepository;
 import com.networkMapping.shared.exceptions.NotFoundEntityException;
 import org.springframework.stereotype.Service;
 
