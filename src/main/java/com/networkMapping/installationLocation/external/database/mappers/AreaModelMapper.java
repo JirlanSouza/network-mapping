@@ -1,4 +1,4 @@
-package com.networkMapping.installationLocation.external.database.repositories.mappers;
+package com.networkMapping.installationLocation.external.database.mappers;
 
 import com.networkMapping.installationLocation.external.database.models.AreaModel;
 import com.networkMapping.installationLocation.application.presenters.AreaDataPresenter;

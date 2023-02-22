@@ -1,10 +1,10 @@
 package com.networkMapping.installationLocation.external.database.repositories;
 
-import com.networkMapping.installationLocation.domain.Area;
-import com.networkMapping.installationLocation.external.database.models.AreaModel;
-import com.networkMapping.installationLocation.external.database.repositories.mappers.AreaModelMapper;
 import com.networkMapping.installationLocation.application.presenters.AreaDataPresenter;
 import com.networkMapping.installationLocation.application.repositories.AreaRepository;
+import com.networkMapping.installationLocation.domain.Area;
+import com.networkMapping.installationLocation.external.database.mappers.AreaModelMapper;
+import com.networkMapping.installationLocation.external.database.models.AreaModel;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
