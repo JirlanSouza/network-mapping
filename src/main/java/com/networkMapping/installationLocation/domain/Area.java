@@ -1,13 +1,19 @@
 package com.networkMapping.installationLocation.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class Area {
-    private UUID id;
+    private final UUID id;
     private String name;
 
-    private List<SubArea> subAreas;
+    private final List<SubArea> subAreas;
+    public Area(String name) {
+        this.id = UUID.randomUUID();
+        this.name = name;
+        this.subAreas = new ArrayList<SubArea>();
+    }
 
     public Area(String name, List<SubArea> subAreas) {
         this.id = UUID.randomUUID();
@@ -20,6 +26,7 @@ public class Area {
         this.name = name;
         this.subAreas = subAreas;
     }
+
 
     public UUID getId() {
         return id;
