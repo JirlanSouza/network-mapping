@@ -10,27 +10,31 @@ public class NetworkSwitch {
     private String brand;
     private String model;
     private final List<NetworkPort> ports;
+    private final UUID installationLocalId;
 
     public NetworkSwitch(
         UUID id,
         String identificationTag,
         String brand,
         String model,
-        List<NetworkPort> ports
+        List<NetworkPort> ports,
+        UUID installationLocalId
     ) {
         this.id = id;
         this.identificationTag = identificationTag;
         this.brand = brand;
         this.model = model;
         this.ports = ports;
+        this.installationLocalId = installationLocalId;
     }
 
-    public NetworkSwitch(String identificationTag, String brand, String model) {
+    public NetworkSwitch(String identificationTag, String brand, String model, UUID installationLocalId) {
         this.id = UUID.randomUUID();
         this.identificationTag = identificationTag;
         this.brand = brand;
         this.model = model;
         this.ports = new ArrayList<NetworkPort>();
+        this.installationLocalId = installationLocalId;
     }
 
     public void addPort(NetworkPort portGroup) {
@@ -67,5 +71,9 @@ public class NetworkSwitch {
 
     public List<NetworkPort> getPorts() {
         return ports;
+    }
+
+    public UUID getInstallationLocalId() {
+        return installationLocalId;
     }
 }
