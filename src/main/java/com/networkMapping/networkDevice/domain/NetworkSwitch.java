@@ -37,8 +37,14 @@ public class NetworkSwitch {
         this.installationLocalId = installationLocalId;
     }
 
-    public void addPort(NetworkPort portGroup) {
-        this.ports.add(portGroup);
+    public void addPorts(NetworkPortGroup portGroup) {
+        if (portGroup.startNumber() > portGroup.endNumber()) {
+            throw new RuntimeException("the post sequence is invalid");
+        }
+
+        for (int i = portGroup.startNumber(); i <= portGroup.endNumber(); i++) {
+            ports.add(new NetworkPort(i, portGroup.port()));
+        }
     }
 
     public UUID getId() {

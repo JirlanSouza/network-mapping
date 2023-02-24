@@ -4,25 +4,32 @@ import com.networkMapping.networkDevice.domain.DataSpeedUnit;
 import com.networkMapping.networkDevice.domain.NetworkPortType;
 import jakarta.persistence.*;
 
-@Entity
-@Table(name = "network_port_type")
-@IdClass(value = NetworkPortTypeModelId.class)
-public class NetworkPortTypeModel {
+import java.util.UUID;
 
+@Entity
+@Table(
+    name = "network_port_type",
+    uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "speed", "speedUnit"})}
+)
+public class NetworkPortTypeModel {
     @Id
+    UUID id;
     private String name;
-    @Id
     private int speed;
     @Enumerated(EnumType.STRING)
     private DataSpeedUnit speedUnit;
 
     public NetworkPortTypeModel(NetworkPortType portType) {
-        this.name = portType.name();
-        this.speed = portType.speed();
-        this.speedUnit = portType.speedUnit();
+        this.id = portType.getId();
+        this.name = portType.getName();
+        this.speed = portType.getSpeed();
+        this.speedUnit = portType.getSpeedUnit();
     }
 
     public NetworkPortTypeModel() {
+    }
 
+    public NetworkPortType toEntity() {
+        return new NetworkPortType(id, name, speed, speedUnit);
     }
 }
