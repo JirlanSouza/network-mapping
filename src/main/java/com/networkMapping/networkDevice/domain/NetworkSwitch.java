@@ -1,5 +1,7 @@
 package com.networkMapping.networkDevice.domain;
 
+import com.networkMapping.networkDevice.domain.exceptions.InvalidNetworkPortSequence;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -39,7 +41,12 @@ public class NetworkSwitch {
 
     public void addPorts(NetworkPortGroup portGroup) {
         if (portGroup.startNumber() > portGroup.endNumber()) {
-            throw new RuntimeException("the post sequence is invalid");
+            throw new InvalidNetworkPortSequence(
+                "invalid ports sequence from: %d to: %d".formatted(
+                    portGroup.startNumber(),
+                    portGroup.endNumber()
+                )
+            );
         }
 
         for (int i = portGroup.startNumber(); i <= portGroup.endNumber(); i++) {
