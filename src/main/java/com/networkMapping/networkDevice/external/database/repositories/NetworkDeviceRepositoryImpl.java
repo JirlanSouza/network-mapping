@@ -5,6 +5,7 @@ import com.networkMapping.networkDevice.domain.NetworkPortType;
 import com.networkMapping.networkDevice.domain.NetworkSwitch;
 import com.networkMapping.networkDevice.external.database.models.NetworkPortTypeModel;
 import com.networkMapping.networkDevice.external.database.models.NetworkPortModel;
+import com.networkMapping.networkDevice.external.database.models.NetworkSwitchModel;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
@@ -15,10 +16,12 @@ import java.util.UUID;
 public class NetworkDeviceRepositoryImpl implements NetworkDeviceRepository {
     private final NetworkPortTypeRepositoryJPA networkPortTypeRepositoryJPA;
     private final NetworkPortRepositoryJPA networkPortRepositoryJPA;
+    private final NetworkSwitchRepositoryJPA networkSwitchRepositoryJPA;
 
-    public NetworkDeviceRepositoryImpl(NetworkPortTypeRepositoryJPA networkPortTypeRepositoryJPA, NetworkPortRepositoryJPA networkPortRepositoryJPA) {
+    public NetworkDeviceRepositoryImpl(NetworkPortTypeRepositoryJPA networkPortTypeRepositoryJPA, NetworkPortRepositoryJPA networkPortRepositoryJPA, NetworkSwitchRepositoryJPA networkSwitchRepositoryJPA) {
         this.networkPortTypeRepositoryJPA = networkPortTypeRepositoryJPA;
         this.networkPortRepositoryJPA = networkPortRepositoryJPA;
+        this.networkSwitchRepositoryJPA = networkSwitchRepositoryJPA;
     }
 
     @Override
@@ -40,8 +43,12 @@ public class NetworkDeviceRepositoryImpl implements NetworkDeviceRepository {
     @Override
     @Transactional
     public void saveSwitch(NetworkSwitch networkSwitch) {
-        networkPortRepositoryJPA.saveAll (
-            networkSwitch.getPorts().stream().map(NetworkPortModel::new).toList()
+        networkSwitchRepositoryJPA.save(new NetworkSwitchModel(networkSwitch));
+        networkPortRepositoryJPA.saveAll(
+            networkSwitch.getPorts().stream().map(port -> new NetworkPortModel(
+                port, networkSwitch.getId()
+            )).toList()
         );
+
     }
 }

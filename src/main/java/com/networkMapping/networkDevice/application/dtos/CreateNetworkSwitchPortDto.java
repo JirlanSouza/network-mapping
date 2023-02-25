@@ -1,10 +1,8 @@
 package com.networkMapping.networkDevice.application.dtos;
 
-import com.networkMapping.networkDevice.domain.NetworkPortType;
-
 import java.util.UUID;
 
-public record CreateSwitchPortDto(
+public record CreateNetworkSwitchPortDto(
     int startNumber,
     int endNumber,
     UUID portTypeId

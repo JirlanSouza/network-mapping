@@ -15,14 +15,19 @@ public class NetworkPortModel {
 
     UUID portTypeId;
 
+    @Column(name = "parent_id")
+    UUID parentId;
+
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     NetworkPortStatus status;
 
-    public NetworkPortModel(NetworkPort port) {
+    public NetworkPortModel(NetworkPort port, UUID parentId) {
         this.id = port.getId();
         this.number = port.getNumber();
         this.portTypeId = port.getType().getId();
+        this.parentId = parentId;
+        this.status = port.getStatus();
     }
 
     public NetworkPortModel() {

@@ -7,7 +7,7 @@ public record CreateNetworkSwitchDto(
     String identificationTag,
     String brand,
     String model,
-    List<CreateSwitchPortDto> ports,
+    List<CreateNetworkSwitchPortDto> ports,
     UUID installationLocalId
 ) {
 }

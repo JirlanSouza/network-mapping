@@ -15,9 +15,9 @@ insert into sub_area (id, name, parent_id) values (uuid_to_bin(uuid()), 'SUB_ARE
 insert into sub_area (id, name, parent_id) values (uuid_to_bin(uuid()), 'SUB_AREA006', uuid_to_bin('6784f6d0-2d39-48f8-a357-7f9fae325cb9'));
 insert into sub_area (id, name, parent_id) values (uuid_to_bin(uuid()), 'SUB_AREA006', uuid_to_bin('6784f6d0-2d39-48f8-a357-7f9fae325cb9'));
 
-insert into network_port_type (name, speed, speed_unit) values ('ethernet', 1, 'GBPS');
-insert into network_port_type (name, speed, speed_unit) values ('ethernet', 10, 'MBPS');
-insert into network_port_type (name, speed, speed_unit) values ('ethernet', 100, 'MBPS');
-insert into network_port_type (name, speed, speed_unit) values ('ftp', 1, 'GBPS');
-insert into network_port_type (name, speed, speed_unit) values ('ftp', 10, 'GBPS');
+insert into network_port_type (id, name, speed, speed_unit) values (uuid_to_bin(uuid()), 'ethernet', 1, 'GBPS');
+insert into network_port_type (id, name, speed, speed_unit) values (uuid_to_bin(uuid()), 'ethernet', 10, 'MBPS');
+insert into network_port_type (id, name, speed, speed_unit) values (uuid_to_bin(uuid()), 'ethernet', 100, 'MBPS');
+insert into network_port_type (id, name, speed, speed_unit) values (uuid_to_bin(uuid()), 'ftp', 1, 'GBPS');
+insert into network_port_type (id, name, speed, speed_unit) values (uuid_to_bin(uuid()), 'ftp', 10, 'GBPS');
 
