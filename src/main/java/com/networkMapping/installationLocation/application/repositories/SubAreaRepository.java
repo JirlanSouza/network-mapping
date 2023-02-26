@@ -15,4 +15,6 @@ public interface SubAreaRepository {
     void save(SubArea subArea);
 
     Optional<SubAreaDataPresenter> getSubAreaData(UUID id);
+
+    boolean exists(UUID id);
 }

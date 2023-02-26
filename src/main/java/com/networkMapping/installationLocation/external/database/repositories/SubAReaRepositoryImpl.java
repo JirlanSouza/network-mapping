@@ -42,4 +42,9 @@ public class SubAReaRepositoryImpl implements SubAreaRepository {
     public Optional<SubAreaDataPresenter> getSubAreaData(UUID id) {
         return subAreaRepositoryJPA.findById(id).map(SubAreaModelMapper::toOverviewPresenter);
     }
+
+    @Override
+    public boolean exists(UUID id) {
+        return subAreaRepositoryJPA.existsById(id);
+    }
 }
