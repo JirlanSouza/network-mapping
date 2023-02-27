@@ -1,14 +1,17 @@
 package com.networkMapping.networkDevice.external.database.repositories;
 
+import com.networkMapping.networkDevice.application.dtos.GetNetworkSwitchesDto;
 import com.networkMapping.networkDevice.application.repositories.NetworkDeviceRepository;
 import com.networkMapping.networkDevice.domain.NetworkPortType;
 import com.networkMapping.networkDevice.domain.NetworkSwitch;
+import com.networkMapping.networkDevice.external.database.mappers.NetworkSwitchModelMapper;
 import com.networkMapping.networkDevice.external.database.models.NetworkPortTypeModel;
 import com.networkMapping.networkDevice.external.database.models.NetworkPortModel;
 import com.networkMapping.networkDevice.external.database.models.NetworkSwitchModel;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -18,7 +21,11 @@ public class NetworkDeviceRepositoryImpl implements NetworkDeviceRepository {
     private final NetworkPortRepositoryJPA networkPortRepositoryJPA;
     private final NetworkSwitchRepositoryJPA networkSwitchRepositoryJPA;
 
-    public NetworkDeviceRepositoryImpl(NetworkPortTypeRepositoryJPA networkPortTypeRepositoryJPA, NetworkPortRepositoryJPA networkPortRepositoryJPA, NetworkSwitchRepositoryJPA networkSwitchRepositoryJPA) {
+    public NetworkDeviceRepositoryImpl(
+        NetworkPortTypeRepositoryJPA networkPortTypeRepositoryJPA,
+        NetworkPortRepositoryJPA networkPortRepositoryJPA,
+        NetworkSwitchRepositoryJPA networkSwitchRepositoryJPA
+    ) {
         this.networkPortTypeRepositoryJPA = networkPortTypeRepositoryJPA;
         this.networkPortRepositoryJPA = networkPortRepositoryJPA;
         this.networkSwitchRepositoryJPA = networkSwitchRepositoryJPA;
@@ -50,5 +57,12 @@ public class NetworkDeviceRepositoryImpl implements NetworkDeviceRepository {
             )).toList()
         );
 
+    }
+
+    @Override
+    public List<GetNetworkSwitchesDto> getSwitchesSummary() {
+        return networkSwitchRepositoryJPA.getSummary()
+            .stream().map(NetworkSwitchModelMapper::networkSwitchesDto)
+            .toList();
     }
 }

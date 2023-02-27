@@ -13,7 +13,12 @@ public class NetworkPortModel {
     UUID id;
     int number;
 
+    @Column(name = "port_type")
     UUID portTypeId;
+
+    @ManyToOne
+    @JoinColumn(name = "port_type_id", referencedColumnName = "id")
+    NetworkPortTypeModel portType;
 
     @Column(name = "parent_id")
     UUID parentId;
@@ -31,5 +36,53 @@ public class NetworkPortModel {
     }
 
     public NetworkPortModel() {
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public UUID getPortTypeId() {
+        return portTypeId;
+    }
+
+    public void setPortTypeId(UUID portTypeId) {
+        this.portTypeId = portTypeId;
+    }
+
+    public NetworkPortTypeModel getPortType() {
+        return portType;
+    }
+
+    public void setPortType(NetworkPortTypeModel portType) {
+        this.portType = portType;
+    }
+
+    public UUID getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(UUID parentId) {
+        this.parentId = parentId;
+    }
+
+    public NetworkPortStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(NetworkPortStatus status) {
+        this.status = status;
     }
 }

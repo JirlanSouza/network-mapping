@@ -32,4 +32,36 @@ public class NetworkPortTypeModel {
     public NetworkPortType toEntity() {
         return new NetworkPortType(id, name, speed, speedUnit);
     }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public DataSpeedUnit getSpeedUnit() {
+        return speedUnit;
+    }
+
+    public void setSpeedUnit(DataSpeedUnit speedUnit) {
+        this.speedUnit = speedUnit;
+    }
 }
