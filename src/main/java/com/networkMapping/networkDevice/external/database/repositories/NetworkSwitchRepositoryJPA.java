@@ -10,9 +10,9 @@ import java.util.UUID;
 public interface NetworkSwitchRepositoryJPA extends CrudRepository<NetworkSwitchModel, UUID> {
     @Query(value = """
         select s from NetworkSwitchModel s
-        left join NetworkPortModel p on s.id = p.parentId
-        left join NetworkPortTypeModel t on p.portTypeId = t.id
-        join SubAreaModel sa on s.installationLocal.id = sa.id
+        join fetch SubAreaModel sa
+        join fetch NetworkPortModel p
+        join fetch NetworkPortTypeModel t
         """)
     List<NetworkSwitchModel> getSummary();
 }
