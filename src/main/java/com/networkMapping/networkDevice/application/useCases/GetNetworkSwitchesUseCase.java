@@ -1,6 +1,6 @@
 package com.networkMapping.networkDevice.application.useCases;
 
-import com.networkMapping.networkDevice.application.dtos.GetNetworkSwitchesDto;
+import com.networkMapping.networkDevice.application.dtos.GetNetworkSwitchDto;
 import com.networkMapping.networkDevice.application.repositories.NetworkDeviceRepository;
 
 import java.util.List;
@@ -12,7 +12,7 @@ public class GetNetworkSwitchesUseCase {
         this.networkDeviceRepository = networkDeviceRepository;
     }
 
-    public List<GetNetworkSwitchesDto> execute() {
+    public List<GetNetworkSwitchDto> execute() {
         return networkDeviceRepository.getSwitchesSummary();
     }
 }

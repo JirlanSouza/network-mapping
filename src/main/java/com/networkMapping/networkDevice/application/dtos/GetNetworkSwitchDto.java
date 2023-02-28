@@ -3,7 +3,7 @@ package com.networkMapping.networkDevice.application.dtos;
 import java.util.List;
 import java.util.UUID;
 
-public record GetNetworkSwitchesDto(
+public record GetNetworkSwitchDto(
     UUID id,
     String identificationTag,
     String brand,

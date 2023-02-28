@@ -1,12 +1,12 @@
 package com.networkMapping.networkDevice.external.database.repositories;
 
-import com.networkMapping.networkDevice.application.dtos.GetNetworkSwitchesDto;
+import com.networkMapping.networkDevice.application.dtos.GetNetworkSwitchDto;
 import com.networkMapping.networkDevice.application.repositories.NetworkDeviceRepository;
 import com.networkMapping.networkDevice.domain.NetworkPortType;
 import com.networkMapping.networkDevice.domain.NetworkSwitch;
 import com.networkMapping.networkDevice.external.database.mappers.NetworkSwitchModelMapper;
-import com.networkMapping.networkDevice.external.database.models.NetworkPortTypeModel;
 import com.networkMapping.networkDevice.external.database.models.NetworkPortModel;
+import com.networkMapping.networkDevice.external.database.models.NetworkPortTypeModel;
 import com.networkMapping.networkDevice.external.database.models.NetworkSwitchModel;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
@@ -60,9 +60,14 @@ public class NetworkDeviceRepositoryImpl implements NetworkDeviceRepository {
     }
 
     @Override
-    public List<GetNetworkSwitchesDto> getSwitchesSummary() {
+    public List<GetNetworkSwitchDto> getSwitchesSummary() {
         return networkSwitchRepositoryJPA.getSummary()
             .stream().map(NetworkSwitchModelMapper::networkSwitchesDto)
             .toList();
+    }
+
+    @Override
+    public Optional<GetNetworkSwitchDto> getSwitchSummary(UUID id) {
+        return networkSwitchRepositoryJPA.findById(id).map(NetworkSwitchModelMapper::networkSwitchesDto);
     }
 }

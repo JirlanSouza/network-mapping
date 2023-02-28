@@ -1,11 +1,11 @@
 package com.networkMapping.networkDevice.external.database.mappers;
 
-import com.networkMapping.networkDevice.application.dtos.GetNetworkSwitchesDto;
+import com.networkMapping.networkDevice.application.dtos.GetNetworkSwitchDto;
 import com.networkMapping.networkDevice.external.database.models.NetworkSwitchModel;
 
 public class NetworkSwitchModelMapper {
-    public static GetNetworkSwitchesDto networkSwitchesDto(NetworkSwitchModel model) {
-        return new GetNetworkSwitchesDto(
+    public static GetNetworkSwitchDto networkSwitchesDto(NetworkSwitchModel model) {
+        return new GetNetworkSwitchDto(
             model.getId(),
             model.getIdentificationTag(),
             model.getBrand(),

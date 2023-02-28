@@ -1,6 +1,6 @@
 package com.networkMapping.networkDevice.application.repositories;
 
-import com.networkMapping.networkDevice.application.dtos.GetNetworkSwitchesDto;
+import com.networkMapping.networkDevice.application.dtos.GetNetworkSwitchDto;
 import com.networkMapping.networkDevice.domain.NetworkPortType;
 import com.networkMapping.networkDevice.domain.NetworkSwitch;
 
@@ -17,5 +17,7 @@ public interface NetworkDeviceRepository {
 
     void saveSwitch(NetworkSwitch networkSwitch);
 
-    List<GetNetworkSwitchesDto> getSwitchesSummary();
+    List<GetNetworkSwitchDto> getSwitchesSummary();
+
+    Optional<GetNetworkSwitchDto> getSwitchSummary(UUID id);
 }
