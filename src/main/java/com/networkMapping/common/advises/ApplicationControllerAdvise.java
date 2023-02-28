@@ -1,5 +1,6 @@
 package com.networkMapping.common.advises;
 
+import com.networkMapping.networkDevice.domain.errors.DuplicatedNetworkPortNumberException;
 import com.networkMapping.networkDevice.domain.exceptions.InvalidNetworkPortSequence;
 import com.networkMapping.shared.exceptions.AlreadyExistsEntityException;
 import com.networkMapping.shared.exceptions.NotFoundEntityException;
@@ -27,7 +28,7 @@ public class ApplicationControllerAdvise extends ResponseEntityExceptionHandler 
         return  getDetail(HttpStatus.BAD_REQUEST, exception);
     }
 
-    @ExceptionHandler(value = {AlreadyExistsEntityException.class})
+    @ExceptionHandler(value = {AlreadyExistsEntityException.class, DuplicatedNetworkPortNumberException.class})
     protected ProblemDetail handleConflictError(RuntimeException exception) {
         return getDetail(HttpStatus.CONFLICT, exception);
     }

@@ -1,5 +1,6 @@
 package com.networkMapping.networkDevice.domain;
 
+import com.networkMapping.networkDevice.domain.errors.DuplicatedNetworkPortNumberException;
 import com.networkMapping.networkDevice.domain.exceptions.InvalidNetworkPortSequence;
 
 import java.util.ArrayList;
@@ -50,8 +51,23 @@ public class NetworkSwitch {
         }
 
         for (int i = portGroup.startNumber(); i <= portGroup.endNumber(); i++) {
-            ports.add(new NetworkPort(i, portGroup.port()));
+            addPort(new NetworkPort(i, portGroup.port()));
         }
+    }
+
+    private void addPort(NetworkPort port) {
+        var existingPortsWithEqualNumber = ports.stream()
+            .anyMatch(
+                currentPort -> currentPort.getNumber() == port.getNumber()
+            );
+
+        if (existingPortsWithEqualNumber) {
+            throw new DuplicatedNetworkPortNumberException(
+                "duplicated network port number: %d on network switch".formatted(port.getNumber())
+            );
+        }
+
+        ports.add(port);
     }
 
     public UUID getId() {
