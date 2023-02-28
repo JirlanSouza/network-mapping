@@ -7,11 +7,10 @@ import com.networkMapping.networkDevice.application.repositories.NetworkDeviceRe
 import com.networkMapping.networkDevice.domain.NetworkPortGroup;
 import com.networkMapping.networkDevice.domain.NetworkSwitch;
 import com.networkMapping.shared.exceptions.NotFoundEntityException;
-import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
-@Service
+
 public class CreateNetworkSwitchUseCase {
     private final NetworkDeviceRepository networkDeviceRepository;
     private final SubAreaRepository subAreaRepository;

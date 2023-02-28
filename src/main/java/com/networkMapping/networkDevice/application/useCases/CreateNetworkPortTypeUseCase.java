@@ -3,9 +3,8 @@ package com.networkMapping.networkDevice.application.useCases;
 import com.networkMapping.networkDevice.application.repositories.NetworkDeviceRepository;
 import com.networkMapping.networkDevice.domain.NetworkPortType;
 import com.networkMapping.shared.exceptions.AlreadyExistsEntityException;
-import org.springframework.stereotype.Service;
 
-@Service
+
 public class CreateNetworkPortTypeUseCase {
     private final NetworkDeviceRepository networkDeviceRepository;
 

@@ -4,9 +4,7 @@ import com.networkMapping.installationLocation.application.dtos.CreateAreaDto;
 import com.networkMapping.installationLocation.application.repositories.AreaRepository;
 import com.networkMapping.installationLocation.domain.Area;
 import com.networkMapping.shared.exceptions.AlreadyExistsEntityException;
-import org.springframework.stereotype.Service;
 
-@Service
 public class CreateAreaUseCase {
     private final AreaRepository areaRepository;
 
@@ -19,7 +17,8 @@ public class CreateAreaUseCase {
 
         if (existsArea) {
             throw new AlreadyExistsEntityException(
-                String.format("area with name: %s already exists", createAreaDto.name()));
+                String.format("area with name: %s already exists", createAreaDto.name())
+            );
         }
 
         var area = new Area(createAreaDto.name());
