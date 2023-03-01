@@ -1,7 +1,7 @@
 package com.networkMapping.networkDevice.external.database.models;
 
-import com.networkMapping.networkDevice.domain.DataSpeedUnit;
-import com.networkMapping.networkDevice.domain.NetworkPortType;
+import com.networkMapping.networkDevice.domain.valueObjects.DataSpeedUnit;
+import com.networkMapping.networkDevice.domain.entities.NetworkPortType;
 import jakarta.persistence.*;
 
 import java.util.UUID;

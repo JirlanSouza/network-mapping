@@ -1,7 +1,7 @@
 package com.networkMapping.networkDevice.application.useCases;
 
 import com.networkMapping.networkDevice.application.repositories.NetworkDeviceRepository;
-import com.networkMapping.networkDevice.domain.NetworkPortType;
+import com.networkMapping.networkDevice.domain.entities.NetworkPortType;
 import com.networkMapping.shared.exceptions.AlreadyExistsEntityException;
 
 

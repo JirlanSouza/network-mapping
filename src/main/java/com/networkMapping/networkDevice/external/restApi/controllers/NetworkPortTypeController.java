@@ -1,7 +1,7 @@
 package com.networkMapping.networkDevice.external.restApi.controllers;
 
 import com.networkMapping.networkDevice.application.useCases.CreateNetworkPortTypeUseCase;
-import com.networkMapping.networkDevice.domain.NetworkPortType;
+import com.networkMapping.networkDevice.domain.entities.NetworkPortType;
 import com.networkMapping.networkDevice.external.restApi.requestDtos.CreateNetworkPortTypeRequestDto;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;

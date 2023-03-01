@@ -1,6 +1,6 @@
 package com.networkMapping.common.advises;
 
-import com.networkMapping.networkDevice.domain.errors.DuplicatedNetworkPortNumberException;
+import com.networkMapping.networkDevice.domain.exceptions.DuplicatedNetworkPortNumberException;
 import com.networkMapping.networkDevice.domain.exceptions.InvalidNetworkPortSequence;
 import com.networkMapping.shared.exceptions.AlreadyExistsEntityException;
 import com.networkMapping.shared.exceptions.NotFoundEntityException;

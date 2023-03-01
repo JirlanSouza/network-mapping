@@ -4,8 +4,8 @@ import com.networkMapping.installationLocation.application.repositories.SubAreaR
 import com.networkMapping.networkDevice.application.dtos.CreateNetworkSwitchDto;
 import com.networkMapping.networkDevice.application.dtos.CreateNetworkSwitchPortDto;
 import com.networkMapping.networkDevice.application.repositories.NetworkDeviceRepository;
-import com.networkMapping.networkDevice.domain.NetworkPortGroup;
-import com.networkMapping.networkDevice.domain.NetworkSwitch;
+import com.networkMapping.networkDevice.domain.valueObjects.NetworkPortGroup;
+import com.networkMapping.networkDevice.domain.entities.NetworkSwitch;
 import com.networkMapping.shared.exceptions.NotFoundEntityException;
 
 import java.util.UUID;
@@ -37,7 +37,8 @@ public class CreateNetworkSwitchUseCase {
             networkSwitchDto.identificationTag(),
             networkSwitchDto.brand(),
             networkSwitchDto.model(),
-            networkSwitchDto.installationLocalId()
+            networkSwitchDto.installationLocalId(),
+            networkSwitchDto.layer()
         );
 
         portsType.forEach(networkSwitch::addPorts);

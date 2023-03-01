@@ -1,4 +1,6 @@
-package com.networkMapping.networkDevice.domain;
+package com.networkMapping.networkDevice.domain.entities;
+
+import com.networkMapping.networkDevice.domain.valueObjects.DataSpeedUnit;
 
 import java.util.UUID;
 

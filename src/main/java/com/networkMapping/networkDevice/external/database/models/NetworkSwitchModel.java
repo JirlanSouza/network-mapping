@@ -1,7 +1,8 @@
 package com.networkMapping.networkDevice.external.database.models;
 
 import com.networkMapping.installationLocation.external.database.models.SubAreaModel;
-import com.networkMapping.networkDevice.domain.NetworkSwitch;
+import com.networkMapping.networkDevice.domain.entities.NetworkSwitch;
+import com.networkMapping.networkDevice.domain.valueObjects.NetworkSwitchLayer;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -28,6 +29,9 @@ public class NetworkSwitchModel {
     @JoinColumn(referencedColumnName = "id")
     private SubAreaModel installationLocal;
 
+    @Enumerated(EnumType.STRING)
+    private NetworkSwitchLayer layer;
+
     public NetworkSwitchModel(NetworkSwitch networkSwitch) {
         this.identificationTag = networkSwitch.getIdentificationTag();
         this.id = networkSwitch.getId();
@@ -35,7 +39,9 @@ public class NetworkSwitchModel {
         this.model = networkSwitch.getModel();
         this.installationLocal = new SubAreaModel();
         this.installationLocal.id = networkSwitch.getInstallationLocalId();
+        this.layer = networkSwitch.getLayer();
     }
+
     public NetworkSwitchModel() {
     }
 
@@ -85,5 +91,13 @@ public class NetworkSwitchModel {
 
     public void setInstallationLocal(SubAreaModel installationLocal) {
         this.installationLocal = installationLocal;
+    }
+
+    public NetworkSwitchLayer getLayer() {
+        return layer;
+    }
+
+    public void setLayer(NetworkSwitchLayer layer) {
+        this.layer = layer;
     }
 }

@@ -1,6 +1,7 @@
 package com.networkMapping.networkDevice.external.restApi.requestDtos;
 
 import com.networkMapping.networkDevice.application.dtos.CreateNetworkSwitchDto;
+import com.networkMapping.networkDevice.domain.valueObjects.NetworkSwitchLayer;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -22,7 +23,10 @@ public record CreateNetworkSwitchRequestDto(
     List<CreateNetworkSwitchPortRequestDto> ports,
 
     @NotNull
-    UUID installationLocalId
+    UUID installationLocalId,
+
+    @NotNull
+    NetworkSwitchLayer layer
 ) {
     public CreateNetworkSwitchDto toCreateNetworkSwitchDto() {
 
@@ -31,7 +35,8 @@ public record CreateNetworkSwitchRequestDto(
             brand,
             model,
             ports.stream().map(CreateNetworkSwitchPortRequestDto::toCreateNetworkSwitchPortDto).toList(),
-            installationLocalId
+            installationLocalId,
+            layer
         );
     }
 }

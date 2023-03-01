@@ -21,7 +21,7 @@ insert into network_port_type (id, name, speed, speed_unit) values (uuid_to_bin(
 insert into network_port_type (id, name, speed, speed_unit) values (uuid_to_bin('B97CA5B3-E98F-4723-A9F5-C4D202F4AD0E'), 'ftp', 1, 'GBPS');
 insert into network_port_type (id, name, speed, speed_unit) values (uuid_to_bin(uuid()), 'ftp', 10, 'GBPS');
 
-insert into network_switch (id, brand, model, identification_tag, installation_local_id) values (uuid_to_bin('8C50A83F-5623-44C8-B640-6E4950CA173D'), 'Cisco', 'st3040', 'ST001', uuid_to_bin('CAC2D569-87F9-4B69-A5B5-DBC560CFFF35'));
+insert into network_switch (id, brand, model, identification_tag, installation_local_id, layer) values (uuid_to_bin('8C50A83F-5623-44C8-B640-6E4950CA173D'), 'Cisco', 'st3040', 'ST001', uuid_to_bin('CAC2D569-87F9-4B69-A5B5-DBC560CFFF35'), 'LAYER2');
 
 insert into network_port (id, number, parent_id, port_type, status) values (uuid_to_bin(uuid()), 1, uuid_to_bin('8C50A83F-5623-44C8-B640-6E4950CA173D'), uuid_to_bin('4961AE40-1FB3-402D-B7BE-73F8987B176B'), 'DISCONNECTED');
 insert into network_port (id, number, parent_id, port_type, status) values (uuid_to_bin(uuid()), 2, uuid_to_bin('8C50A83F-5623-44C8-B640-6E4950CA173D'), uuid_to_bin('4961AE40-1FB3-402D-B7BE-73F8987B176B'), 'DISCONNECTED');

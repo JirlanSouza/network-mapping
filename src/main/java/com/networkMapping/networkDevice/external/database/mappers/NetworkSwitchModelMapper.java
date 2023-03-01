@@ -11,7 +11,8 @@ public class NetworkSwitchModelMapper {
             model.getBrand(),
             model.getModel(),
             model.getPorts().stream().map(NetworkPortModelMapper::postsSummaryDto).toList(),
-            model.getInstallationLocal().name
+            model.getInstallationLocal().name,
+            model.getLayer()
         );
     }
 }

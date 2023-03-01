@@ -1,8 +1,8 @@
 package com.networkMapping.networkDevice.application.repositories;
 
 import com.networkMapping.networkDevice.application.dtos.GetNetworkSwitchDto;
-import com.networkMapping.networkDevice.domain.NetworkPortType;
-import com.networkMapping.networkDevice.domain.NetworkSwitch;
+import com.networkMapping.networkDevice.domain.entities.NetworkPortType;
+import com.networkMapping.networkDevice.domain.entities.NetworkSwitch;
 
 import java.util.List;
 import java.util.Optional;
