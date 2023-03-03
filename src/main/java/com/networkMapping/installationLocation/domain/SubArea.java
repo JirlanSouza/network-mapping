@@ -1,5 +1,7 @@
 package com.networkMapping.installationLocation.domain;
 
+import com.networkMapping.installationLocation.domain.exceptions.InvalidSubAreaIdException;
+
 import java.util.UUID;
 
 public class SubArea {
@@ -14,6 +16,9 @@ public class SubArea {
     }
 
     public SubArea(UUID id, String name, UUID parentId) {
+        if (id.equals(parentId)) {
+            throw new InvalidSubAreaIdException("subarea id and parent id cannot be the same");
+        }
         this.id = id;
         this.name = name;
         this.parentId = parentId;

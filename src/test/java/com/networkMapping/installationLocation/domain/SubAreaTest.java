@@ -1,5 +1,6 @@
 package com.networkMapping.installationLocation.domain;
 
+import com.networkMapping.installationLocation.domain.exceptions.InvalidSubAreaIdException;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
@@ -28,6 +29,14 @@ class SubAreaTest {
         assertEquals(subArea.getId(), id);
         assertEquals(subArea.getName(), "SUB_AREA001");
         assertEquals(subArea.getParentId(), parentId);
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenCreateNewSubAreaWithEqualsIdAndParentId() {
+        var id = UUID.randomUUID();
+        var name = "SUB_AREA001";
+
+        assertThrows(InvalidSubAreaIdException.class, () -> new SubArea(id, name, id));
     }
 
 }
