@@ -1,7 +1,9 @@
 package com.networkMapping.common.advises;
 
+import com.networkMapping.installationLocation.domain.exceptions.InvalidSubAreaIdException;
 import com.networkMapping.networkDevice.domain.exceptions.DuplicatedNetworkPortNumberException;
 import com.networkMapping.networkDevice.domain.exceptions.InvalidNetworkPortSequence;
+import com.networkMapping.networkDevice.domain.exceptions.InvalidNetworkSwitchConnectionException;
 import com.networkMapping.shared.exceptions.AlreadyExistsEntityException;
 import com.networkMapping.shared.exceptions.NotFoundEntityException;
 import org.springframework.http.HttpStatus;
@@ -23,9 +25,12 @@ public class ApplicationControllerAdvise extends ResponseEntityExceptionHandler 
         return getDetail(HttpStatus.NOT_FOUND, exception);
     }
 
-    @ExceptionHandler(value = {InvalidNetworkPortSequence.class})
+    @ExceptionHandler(value = {
+        InvalidNetworkPortSequence.class, InvalidNetworkSwitchConnectionException.class,
+        InvalidSubAreaIdException.class
+    })
     protected ProblemDetail handleBadRequestError(RuntimeException exception, WebRequest request) {
-        return  getDetail(HttpStatus.BAD_REQUEST, exception);
+        return getDetail(HttpStatus.BAD_REQUEST, exception);
     }
 
     @ExceptionHandler(value = {AlreadyExistsEntityException.class, DuplicatedNetworkPortNumberException.class})
