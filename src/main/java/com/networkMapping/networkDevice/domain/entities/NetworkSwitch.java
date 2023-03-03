@@ -1,5 +1,6 @@
 package com.networkMapping.networkDevice.domain.entities;
 
+import com.networkMapping.networkDevice.domain.exceptions.InvalidNetworkSwitchConnectionException;
 import com.networkMapping.networkDevice.domain.valueObjects.NetworkPortGroup;
 import com.networkMapping.networkDevice.domain.exceptions.DuplicatedNetworkPortNumberException;
 import com.networkMapping.networkDevice.domain.exceptions.InvalidNetworkPortSequence;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class NetworkSwitch {
+public class NetworkSwitch implements NetworkConnectable {
     private final UUID id;
     private String identificationTag;
     private String brand;
@@ -76,6 +77,25 @@ public class NetworkSwitch {
         }
 
         ports.add(port);
+    }
+
+    public void validateConnection(NetworkConnectable that) {
+        if (that instanceof NetworkSwitch) {
+            validateLayerConnection((NetworkSwitch) that);
+        }
+    }
+
+    private void validateLayerConnection(NetworkSwitch that) {
+        if (layer != NetworkSwitchLayer.LAYER1) {
+            return;
+        }
+
+        if (that.getLayer().equals(layer)) {
+            throw new InvalidNetworkSwitchConnectionException(
+                "the network switch connection does not permitted with network switch with layer %s"
+                    .formatted(layer.name())
+            );
+        }
     }
 
     public UUID getId() {
