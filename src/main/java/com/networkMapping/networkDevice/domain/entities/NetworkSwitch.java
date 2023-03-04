@@ -1,9 +1,8 @@
 package com.networkMapping.networkDevice.domain.entities;
 
+import com.networkMapping.networkDevice.domain.exceptions.DuplicatedNetworkPortNumberException;
 import com.networkMapping.networkDevice.domain.exceptions.InvalidNetworkSwitchConnectionException;
 import com.networkMapping.networkDevice.domain.valueObjects.NetworkPortGroup;
-import com.networkMapping.networkDevice.domain.exceptions.DuplicatedNetworkPortNumberException;
-import com.networkMapping.networkDevice.domain.exceptions.InvalidNetworkPortSequence;
 import com.networkMapping.networkDevice.domain.valueObjects.NetworkSwitchLayer;
 
 import java.util.ArrayList;
@@ -54,26 +53,19 @@ public class NetworkSwitch implements NetworkConnectable {
     }
 
     public void addPorts(NetworkPortGroup portGroup) {
-        if (portGroup.startNumber() > portGroup.endNumber()) {
-            throw new InvalidNetworkPortSequence("invalid ports sequence from: %d to: %d".formatted(
-                portGroup.startNumber(),
-                portGroup.endNumber()
-            ));
-        }
-
-        for (int i = portGroup.startNumber(); i <= portGroup.endNumber(); i++) {
-            addPort(new NetworkPort(i, portGroup.port()));
-        }
+        portGroup.createPorts().forEach(this::addPort);
     }
 
     private void addPort(NetworkPort port) {
-        var
-            existingPortsWithEqualNumber =
-            ports.stream().anyMatch(currentPort -> currentPort.getNumber() == port.getNumber());
+        var existingPortsWithEqualNumber = ports.stream().anyMatch(
+            currentPort -> currentPort.getNumber() == port.getNumber()
+        );
 
         if (existingPortsWithEqualNumber) {
-            throw new DuplicatedNetworkPortNumberException("duplicated network port number: %d on network switch".formatted(
-                port.getNumber()));
+            throw new DuplicatedNetworkPortNumberException(
+                "duplicated network portType number: %d on network switch".formatted(
+                    port.getNumber())
+            );
         }
 
         ports.add(port);

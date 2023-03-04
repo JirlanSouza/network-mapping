@@ -51,7 +51,7 @@ public class CreateNetworkSwitchUseCase {
         var
             portType = networkDeviceRepository.getPortType(portDto.portTypeId())
             .orElseThrow(() -> new NotFoundEntityException(
-                    "the network port type with id: %s does not exists".formatted(
+                    "the network portType type with id: %s does not exists".formatted(
                         portDto.portTypeId())
                 )
             );

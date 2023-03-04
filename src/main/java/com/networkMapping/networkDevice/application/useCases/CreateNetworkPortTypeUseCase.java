@@ -16,7 +16,7 @@ public class CreateNetworkPortTypeUseCase {
         var existsNetworkPortType = networkDeviceRepository.existsPortType(networkPortType);
 
         if (existsNetworkPortType) {
-            throw new AlreadyExistsEntityException("the network port type already exists");
+            throw new AlreadyExistsEntityException("the network portType type already exists");
         }
 
         networkDeviceRepository.savePortType(networkPortType);
