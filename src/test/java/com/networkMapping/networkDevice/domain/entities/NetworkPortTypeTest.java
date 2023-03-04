@@ -1,6 +1,6 @@
 package com.networkMapping.networkDevice.domain.entities;
 
-import com.networkMapping.networkDevice.domain.exceptions.InvalidDataSpeedValue;
+import com.networkMapping.networkDevice.domain.exceptions.InvalidDataSpeedValueException;
 import com.networkMapping.networkDevice.domain.valueObjects.DataSpeedUnit;
 import org.junit.jupiter.api.Test;
 
@@ -26,6 +26,6 @@ class NetworkPortTypeTest {
         var speed = -1;
         var speedUnit = DataSpeedUnit.MBPS;
 
-        assertThrows(InvalidDataSpeedValue.class, () -> new NetworkPortType(name, speed, speedUnit));
+        assertThrows(InvalidDataSpeedValueException.class, () -> new NetworkPortType(name, speed, speedUnit));
     }
 }

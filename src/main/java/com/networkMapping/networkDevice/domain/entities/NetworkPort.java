@@ -1,6 +1,6 @@
 package com.networkMapping.networkDevice.domain.entities;
 
-import com.networkMapping.networkDevice.domain.exceptions.InvalidNetworkPortConnection;
+import com.networkMapping.networkDevice.domain.exceptions.InvalidNetworkPortConnectionException;
 import com.networkMapping.networkDevice.domain.valueObjects.NetworkPortStatus;
 
 import java.util.UUID;
@@ -34,11 +34,11 @@ public class NetworkPort {
 
     private void validateStatusToConnection() {
         if (status == NetworkPortStatus.CONNECTED) {
-            throw new InvalidNetworkPortConnection("connection is not allowed: the network port is already connected");
+            throw new InvalidNetworkPortConnectionException("connection is not allowed: the network port is already connected");
         }
 
         if (status == NetworkPortStatus.FAULT) {
-            throw new InvalidNetworkPortConnection("connection is not allowed: the network port is faulted");
+            throw new InvalidNetworkPortConnectionException("connection is not allowed: the network port is faulted");
         }
     }
 

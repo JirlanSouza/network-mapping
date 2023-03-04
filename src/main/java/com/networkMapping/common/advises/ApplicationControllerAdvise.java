@@ -1,9 +1,7 @@
 package com.networkMapping.common.advises;
 
 import com.networkMapping.installationLocation.domain.exceptions.InvalidSubAreaIdException;
-import com.networkMapping.networkDevice.domain.exceptions.DuplicatedNetworkPortNumberException;
-import com.networkMapping.networkDevice.domain.exceptions.InvalidNetworkPortSequence;
-import com.networkMapping.networkDevice.domain.exceptions.InvalidNetworkSwitchConnectionException;
+import com.networkMapping.networkDevice.domain.exceptions.*;
 import com.networkMapping.shared.exceptions.AlreadyExistsEntityException;
 import com.networkMapping.shared.exceptions.NotFoundEntityException;
 import org.springframework.http.HttpStatus;
@@ -12,24 +10,25 @@ import org.springframework.web.ErrorResponse;
 import org.springframework.web.ErrorResponseException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.net.URI;
 
 @ControllerAdvice
 public class ApplicationControllerAdvise extends ResponseEntityExceptionHandler {
-
     @ExceptionHandler(value = {NotFoundEntityException.class})
     protected ProblemDetail handleNotFoundError(RuntimeException exception) {
         return getDetail(HttpStatus.NOT_FOUND, exception);
     }
 
     @ExceptionHandler(value = {
-        InvalidNetworkPortSequence.class, InvalidNetworkSwitchConnectionException.class,
+        InvalidNetworkPortSequence.class,
+        InvalidNetworkSwitchConnectionException.class,
+        InvalidNetworkPortConnectionException.class,
+        InvalidDataSpeedValueException.class,
         InvalidSubAreaIdException.class
     })
-    protected ProblemDetail handleBadRequestError(RuntimeException exception, WebRequest request) {
+    protected ProblemDetail handleBadRequestError(RuntimeException exception) {
         return getDetail(HttpStatus.BAD_REQUEST, exception);
     }
 

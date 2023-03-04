@@ -1,6 +1,6 @@
 package com.networkMapping.networkDevice.domain.entities;
 
-import com.networkMapping.networkDevice.domain.exceptions.InvalidNetworkPortConnection;
+import com.networkMapping.networkDevice.domain.exceptions.InvalidNetworkPortConnectionException;
 import com.networkMapping.networkDevice.domain.valueObjects.DataSpeedUnit;
 import com.networkMapping.networkDevice.domain.valueObjects.NetworkPortStatus;
 import org.junit.jupiter.api.Test;
@@ -40,6 +40,6 @@ class NetworkPortTest {
         var port3 = new NetworkPort(3, portType);
         port1.connect(port2);
 
-        assertThrows(InvalidNetworkPortConnection.class, () -> port3.connect(port1));
+        assertThrows(InvalidNetworkPortConnectionException.class, () -> port3.connect(port1));
     }
 }
