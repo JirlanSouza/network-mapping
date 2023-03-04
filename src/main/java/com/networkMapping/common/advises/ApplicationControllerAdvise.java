@@ -1,5 +1,6 @@
 package com.networkMapping.common.advises;
 
+import com.networkMapping.installationLocation.domain.exceptions.InvalidLocationNameException;
 import com.networkMapping.installationLocation.domain.exceptions.InvalidSubAreaIdException;
 import com.networkMapping.networkDevice.domain.exceptions.*;
 import com.networkMapping.shared.exceptions.AlreadyExistsEntityException;
@@ -26,7 +27,8 @@ public class ApplicationControllerAdvise extends ResponseEntityExceptionHandler 
         InvalidNetworkSwitchConnectionException.class,
         InvalidNetworkPortConnectionException.class,
         InvalidDataSpeedValueException.class,
-        InvalidSubAreaIdException.class
+        InvalidSubAreaIdException.class,
+        InvalidLocationNameException.class
     })
     protected ProblemDetail handleBadRequestError(RuntimeException exception) {
         return getDetail(HttpStatus.BAD_REQUEST, exception);

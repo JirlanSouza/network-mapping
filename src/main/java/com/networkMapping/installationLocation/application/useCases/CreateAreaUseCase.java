@@ -2,7 +2,7 @@ package com.networkMapping.installationLocation.application.useCases;
 
 import com.networkMapping.installationLocation.application.dtos.CreateAreaDto;
 import com.networkMapping.installationLocation.application.repositories.AreaRepository;
-import com.networkMapping.installationLocation.domain.Area;
+import com.networkMapping.installationLocation.domain.entities.Area;
 import com.networkMapping.shared.exceptions.AlreadyExistsEntityException;
 import com.networkMapping.shared.logger.ApplicationLogger;
 import com.networkMapping.shared.logger.ApplicationLoggerFactory;

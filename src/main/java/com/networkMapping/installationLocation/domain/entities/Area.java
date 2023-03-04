@@ -1,4 +1,6 @@
-package com.networkMapping.installationLocation.domain;
+package com.networkMapping.installationLocation.domain.entities;
+
+import com.networkMapping.installationLocation.domain.valueObjects.LocationName;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,24 +8,24 @@ import java.util.UUID;
 
 public class Area {
     private final UUID id;
-    private String name;
+    private LocationName name;
 
     private final List<SubArea> subAreas;
     public Area(String name) {
         this.id = UUID.randomUUID();
-        this.name = name;
+        this.name = new LocationName(name);
         this.subAreas = new ArrayList<SubArea>();
     }
 
     public Area(String name, List<SubArea> subAreas) {
         this.id = UUID.randomUUID();
-        this.name = name;
+        this.name = new LocationName(name);
         this.subAreas = subAreas;
     }
 
     public Area(UUID id, String name, List<SubArea> subAreas) {
         this.id = id;
-        this.name = name;
+        this.name = new LocationName(name);
         this.subAreas = subAreas;
     }
 
@@ -33,11 +35,11 @@ public class Area {
     }
 
     public String getName() {
-        return name;
+        return name.value();
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = new LocationName(name);
     }
 
     public List<SubArea> getSubAreas() {

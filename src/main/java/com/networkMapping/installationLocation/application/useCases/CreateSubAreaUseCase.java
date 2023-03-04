@@ -3,7 +3,7 @@ package com.networkMapping.installationLocation.application.useCases;
 import com.networkMapping.installationLocation.application.dtos.CreateSubAreaDto;
 import com.networkMapping.installationLocation.application.repositories.AreaRepository;
 import com.networkMapping.installationLocation.application.repositories.SubAreaRepository;
-import com.networkMapping.installationLocation.domain.SubArea;
+import com.networkMapping.installationLocation.domain.entities.SubArea;
 import com.networkMapping.shared.exceptions.AlreadyExistsEntityException;
 import com.networkMapping.shared.exceptions.NotFoundEntityException;
 import com.networkMapping.shared.logger.ApplicationLogger;

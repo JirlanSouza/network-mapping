@@ -1,17 +1,18 @@
-package com.networkMapping.installationLocation.domain;
+package com.networkMapping.installationLocation.domain.entities;
 
 import com.networkMapping.installationLocation.domain.exceptions.InvalidSubAreaIdException;
+import com.networkMapping.installationLocation.domain.valueObjects.LocationName;
 
 import java.util.UUID;
 
 public class SubArea {
-    private UUID id;
-    private String name;
+    private final UUID id;
+    private LocationName name;
     private UUID parentId;
 
     public SubArea(String name, UUID parentId) {
         this.id = UUID.randomUUID();
-        this.name = name;
+        this.name = new LocationName(name);
         this.parentId = parentId;
     }
 
@@ -20,7 +21,7 @@ public class SubArea {
             throw new InvalidSubAreaIdException("subarea id and parent id cannot be the same");
         }
         this.id = id;
-        this.name = name;
+        this.name = new LocationName(name);
         this.parentId = parentId;
     }
 
@@ -29,7 +30,11 @@ public class SubArea {
     }
 
     public String getName() {
-        return name;
+        return name.value();
+    }
+
+    public void setName(String name) {
+        this.name = new LocationName(name);
     }
 
     public UUID getParentId() {

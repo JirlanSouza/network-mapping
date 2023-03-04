@@ -2,7 +2,7 @@ package com.networkMapping.installationLocation.external.database.repositories;
 
 import com.networkMapping.installationLocation.application.presenters.SubAreaDataPresenter;
 import com.networkMapping.installationLocation.application.repositories.SubAreaRepository;
-import com.networkMapping.installationLocation.domain.SubArea;
+import com.networkMapping.installationLocation.domain.entities.SubArea;
 import com.networkMapping.installationLocation.external.database.mappers.SubAreaModelMapper;
 import com.networkMapping.installationLocation.external.database.models.SubAreaModel;
 import org.springframework.stereotype.Repository;

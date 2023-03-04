@@ -1,5 +1,7 @@
 package com.networkMapping.installationLocation.domain;
 
+import com.networkMapping.installationLocation.domain.entities.Area;
+import com.networkMapping.installationLocation.domain.entities.SubArea;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

@@ -1,5 +1,6 @@
 package com.networkMapping.installationLocation.domain;
 
+import com.networkMapping.installationLocation.domain.entities.SubArea;
 import com.networkMapping.installationLocation.domain.exceptions.InvalidSubAreaIdException;
 import org.junit.jupiter.api.Test;
 

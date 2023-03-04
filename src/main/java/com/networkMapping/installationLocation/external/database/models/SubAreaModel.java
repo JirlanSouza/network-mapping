@@ -1,6 +1,6 @@
 package com.networkMapping.installationLocation.external.database.models;
 
-import com.networkMapping.installationLocation.domain.SubArea;
+import com.networkMapping.installationLocation.domain.entities.SubArea;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

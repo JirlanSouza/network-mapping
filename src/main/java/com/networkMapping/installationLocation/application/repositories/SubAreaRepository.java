@@ -1,7 +1,7 @@
 package com.networkMapping.installationLocation.application.repositories;
 
 import com.networkMapping.installationLocation.application.presenters.SubAreaDataPresenter;
-import com.networkMapping.installationLocation.domain.SubArea;
+import com.networkMapping.installationLocation.domain.entities.SubArea;
 
 import java.util.List;
 import java.util.Optional;

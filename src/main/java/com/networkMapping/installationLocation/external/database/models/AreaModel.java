@@ -1,6 +1,6 @@
 package com.networkMapping.installationLocation.external.database.models;
 
-import com.networkMapping.installationLocation.domain.Area;
+import com.networkMapping.installationLocation.domain.entities.Area;
 import jakarta.persistence.*;
 
 import java.util.List;
