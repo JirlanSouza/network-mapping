@@ -1,14 +1,11 @@
 package com.networkMapping.networkDevice.domain.entities;
 
+import com.networkMapping.networkDevice.domain.exceptions.InvalidNetworkPortConnection;
 import com.networkMapping.networkDevice.domain.valueObjects.NetworkPortStatus;
 
 import java.util.UUID;
 
 public class NetworkPort {
-    public UUID getId() {
-        return id;
-    }
-
     private final UUID id;
     private final int number;
     private final NetworkPortType type;
@@ -27,6 +24,28 @@ public class NetworkPort {
         this.status = status;
     }
 
+    public void connect(NetworkPort that) {
+        validateStatusToConnection();
+        that.validateStatusToConnection();
+
+        status = NetworkPortStatus.CONNECTED;
+        that.status = NetworkPortStatus.CONNECTED;
+    }
+
+    private void validateStatusToConnection() {
+        if (status == NetworkPortStatus.CONNECTED) {
+            throw new InvalidNetworkPortConnection("connection is not allowed: the network port is already connected");
+        }
+
+        if (status == NetworkPortStatus.FAULT) {
+            throw new InvalidNetworkPortConnection("connection is not allowed: the network port is faulted");
+        }
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
     public int getNumber() {
         return number;
     }
@@ -37,9 +56,5 @@ public class NetworkPort {
 
     public NetworkPortStatus getStatus() {
         return status;
-    }
-
-    public void setStatus(NetworkPortStatus status) {
-        this.status = status;
     }
 }
