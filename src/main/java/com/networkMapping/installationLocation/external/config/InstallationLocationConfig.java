@@ -24,14 +24,15 @@ public class InstallationLocationConfig {
     @Bean
     public CreateSubAreaUseCase createSubAreaUseCase(
         SubAreaRepository subAreaRepository,
-        AreaRepository areaRepository
+        AreaRepository areaRepository,
+        ApplicationLoggerFactory loggerFactory
     ) {
-        return new CreateSubAreaUseCase(subAreaRepository, areaRepository);
+        return new CreateSubAreaUseCase(subAreaRepository, areaRepository, loggerFactory);
     }
 
     @Bean
-    public UpdateAreaUseCase updateAreaUseCase(AreaRepository repository) {
-        return new UpdateAreaUseCase(repository);
+    public UpdateAreaUseCase updateAreaUseCase(AreaRepository repository, ApplicationLoggerFactory loggerFactory) {
+        return new UpdateAreaUseCase(repository, loggerFactory);
     }
 
     @Bean

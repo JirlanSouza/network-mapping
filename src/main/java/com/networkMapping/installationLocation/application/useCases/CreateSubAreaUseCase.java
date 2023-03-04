@@ -6,14 +6,22 @@ import com.networkMapping.installationLocation.application.repositories.SubAreaR
 import com.networkMapping.installationLocation.domain.SubArea;
 import com.networkMapping.shared.exceptions.AlreadyExistsEntityException;
 import com.networkMapping.shared.exceptions.NotFoundEntityException;
+import com.networkMapping.shared.logger.ApplicationLogger;
+import com.networkMapping.shared.logger.ApplicationLoggerFactory;
 
 public class CreateSubAreaUseCase {
     private final SubAreaRepository subAreaRepository;
     private final AreaRepository areaRepository;
+    private final ApplicationLogger logger;
 
-    public CreateSubAreaUseCase(SubAreaRepository subAreaRepository, AreaRepository areaRepository) {
+    public CreateSubAreaUseCase(
+        SubAreaRepository subAreaRepository,
+        AreaRepository areaRepository,
+        ApplicationLoggerFactory loggerFactory
+    ) {
         this.subAreaRepository = subAreaRepository;
         this.areaRepository = areaRepository;
+        this.logger = loggerFactory.getLogger(CreateSubAreaUseCase.class);
     }
 
 
@@ -36,6 +44,7 @@ public class CreateSubAreaUseCase {
 
         var subArea = new SubArea(createSubAreaDto.name(), createSubAreaDto.parentId());
         subAreaRepository.save(subArea);
+        logger.info("created new sub area with id: %s".formatted(subArea.getId()));
 
         return subArea;
     }

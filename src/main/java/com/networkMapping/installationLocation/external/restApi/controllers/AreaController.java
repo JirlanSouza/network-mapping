@@ -62,7 +62,8 @@ public class AreaController {
     }
 
     @PutMapping("/{id}")
-    public Area updateArea(@PathVariable("id") UUID id, UpdateAreaRequestDto requestDto) {
+    public Area updateArea(@PathVariable("id") UUID id, @RequestBody @Valid UpdateAreaRequestDto requestDto) {
+        System.out.println(requestDto);
         return updateAreaUseCase.execute(new UpdateAreaDto(id, requestDto.name()));
     }
 

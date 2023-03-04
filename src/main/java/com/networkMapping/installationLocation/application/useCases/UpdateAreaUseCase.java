@@ -4,13 +4,17 @@ import com.networkMapping.installationLocation.application.dtos.UpdateAreaDto;
 import com.networkMapping.installationLocation.application.repositories.AreaRepository;
 import com.networkMapping.installationLocation.domain.Area;
 import com.networkMapping.shared.exceptions.NotFoundEntityException;
+import com.networkMapping.shared.logger.ApplicationLogger;
+import com.networkMapping.shared.logger.ApplicationLoggerFactory;
 
 
 public class UpdateAreaUseCase {
+    private final ApplicationLogger logger;
     private final AreaRepository areaRepository;
 
-    public UpdateAreaUseCase(AreaRepository areaRepository) {
+    public UpdateAreaUseCase(AreaRepository areaRepository, ApplicationLoggerFactory loggerFactory) {
         this.areaRepository = areaRepository;
+        this.logger = loggerFactory.getLogger(UpdateAreaUseCase.class);
     }
 
     public Area execute(UpdateAreaDto updateAreaDto) {
@@ -22,6 +26,7 @@ public class UpdateAreaUseCase {
 
         area.setName(updateAreaDto.name());
         areaRepository.save(area);
+        logger.info("updated area with id: %s".formatted(area.getId()));
 
         return area;
     }
