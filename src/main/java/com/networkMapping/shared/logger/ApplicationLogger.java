@@ -1,4 +1,10 @@
 package com.networkMapping.shared.logger;
 
-public interface ApplicationLogger extends System.Logger {
+import org.slf4j.Logger;
+
+public interface ApplicationLogger {
+    void info(String msg);
+    void debug(String msg);
+    void warn(String msg);
+    void error(Exception exception);
 }
