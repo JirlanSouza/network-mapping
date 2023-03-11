@@ -6,6 +6,7 @@ import com.networkMapping.networkDevice.application.useCases.CreateNetworkPortTy
 import com.networkMapping.networkDevice.application.useCases.CreateNetworkSwitchUseCase;
 import com.networkMapping.networkDevice.application.useCases.GetNetworkSwitchUseCase;
 import com.networkMapping.networkDevice.application.useCases.GetNetworkSwitchesUseCase;
+import com.networkMapping.shared.logger.ApplicationLoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -24,13 +25,17 @@ public class NetworkDeviceConfig {
     @Bean
     public CreateNetworkSwitchUseCase createNetworkSwitchUseCase(
         NetworkDeviceRepository switchRepository,
-        SubAreaRepository subAreaRepository
+        SubAreaRepository subAreaRepository,
+        ApplicationLoggerFactory loggerFactory
     ) {
-        return new CreateNetworkSwitchUseCase(switchRepository, subAreaRepository);
+        return new CreateNetworkSwitchUseCase(switchRepository, subAreaRepository, loggerFactory);
     }
 
     @Bean
-    public CreateNetworkPortTypeUseCase createNetworkPortTypeUseCase(NetworkDeviceRepository repository) {
-        return new CreateNetworkPortTypeUseCase(repository);
+    public CreateNetworkPortTypeUseCase createNetworkPortTypeUseCase(
+        NetworkDeviceRepository repository,
+        ApplicationLoggerFactory loggerFactory
+    ) {
+        return new CreateNetworkPortTypeUseCase(repository, loggerFactory);
     }
 }

@@ -4,9 +4,11 @@ import com.networkMapping.installationLocation.application.repositories.SubAreaR
 import com.networkMapping.networkDevice.application.dtos.CreateNetworkSwitchDto;
 import com.networkMapping.networkDevice.application.dtos.CreateNetworkSwitchPortDto;
 import com.networkMapping.networkDevice.application.repositories.NetworkDeviceRepository;
-import com.networkMapping.networkDevice.domain.valueObjects.NetworkPortGroup;
 import com.networkMapping.networkDevice.domain.entities.NetworkSwitch;
+import com.networkMapping.networkDevice.domain.valueObjects.NetworkPortGroup;
 import com.networkMapping.shared.exceptions.NotFoundEntityException;
+import com.networkMapping.shared.logger.ApplicationLogger;
+import com.networkMapping.shared.logger.ApplicationLoggerFactory;
 
 import java.util.UUID;
 
@@ -14,12 +16,16 @@ import java.util.UUID;
 public class CreateNetworkSwitchUseCase {
     private final NetworkDeviceRepository networkDeviceRepository;
     private final SubAreaRepository subAreaRepository;
+    private final ApplicationLogger logger;
 
     public CreateNetworkSwitchUseCase(
-        NetworkDeviceRepository networkDeviceRepository, SubAreaRepository areaRepository
+        NetworkDeviceRepository networkDeviceRepository,
+        SubAreaRepository areaRepository,
+        ApplicationLoggerFactory loggerFactory
     ) {
         this.networkDeviceRepository = networkDeviceRepository;
         this.subAreaRepository = areaRepository;
+        this.logger = loggerFactory.getLogger(CreateNetworkSwitchUseCase.class);
     }
 
     public UUID execute(CreateNetworkSwitchDto networkSwitchDto) {
@@ -44,6 +50,7 @@ public class CreateNetworkSwitchUseCase {
         portsType.forEach(networkSwitch::addPorts);
         networkDeviceRepository.saveSwitch(networkSwitch);
 
+        logger.info("created the new network switch with id: %s".formatted(networkSwitch.getId()));
         return networkSwitch.getId();
     }
 
