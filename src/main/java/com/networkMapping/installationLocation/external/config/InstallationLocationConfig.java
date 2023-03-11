@@ -4,18 +4,11 @@ import com.networkMapping.installationLocation.application.repositories.AreaRepo
 import com.networkMapping.installationLocation.application.repositories.SubAreaRepository;
 import com.networkMapping.installationLocation.application.useCases.*;
 import com.networkMapping.shared.logger.ApplicationLoggerFactory;
-import com.networkMapping.shared.logger.ApplicationLoggerFactoryImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class InstallationLocationConfig {
-
-    @Bean
-    ApplicationLoggerFactory loggerFactory() {
-        return new ApplicationLoggerFactoryImpl();
-    }
-
     @Bean
     public CreateAreaUseCase createAreaUseCase(AreaRepository repository, ApplicationLoggerFactory loggerFactory) {
         return new CreateAreaUseCase(repository, loggerFactory);
