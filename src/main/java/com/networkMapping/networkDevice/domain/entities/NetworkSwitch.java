@@ -78,11 +78,8 @@ public class NetworkSwitch implements NetworkConnectable {
     }
 
     private void validateLayerConnection(NetworkSwitch that) {
-        if (layer != NetworkSwitchLayer.LAYER1) {
-            return;
-        }
 
-        if (that.getLayer().equals(layer)) {
+        if (!layer.acceptableConnection(that.getLayer())) {
             throw new InvalidNetworkSwitchConnectionException(
                 "the network switch connection does not permitted with network switch with layer %s"
                     .formatted(layer.name())
