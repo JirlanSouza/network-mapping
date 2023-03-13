@@ -2,9 +2,13 @@ package com.networkMapping.networkDevice.domain.entities;
 
 import com.networkMapping.networkDevice.domain.exceptions.InvalidNetworkPortConnectionException;
 import com.networkMapping.networkDevice.domain.valueObjects.NetworkPortStatus;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.util.UUID;
 
+@Getter
+@AllArgsConstructor
 public class NetworkPort {
     private final UUID id;
     private final int number;
@@ -17,13 +21,6 @@ public class NetworkPort {
         this.type = type;
     }
 
-    public NetworkPort(UUID id, int number, NetworkPortType type, NetworkPortStatus status) {
-        this.id = id;
-        this.number = number;
-        this.type = type;
-        this.status = status;
-    }
-
     public void connect(NetworkPort that) {
         validateStatusToConnection();
         that.validateStatusToConnection();
@@ -34,27 +31,12 @@ public class NetworkPort {
 
     private void validateStatusToConnection() {
         if (status == NetworkPortStatus.CONNECTED) {
-            throw new InvalidNetworkPortConnectionException("connection is not allowed: the network port is already connected");
+            throw new InvalidNetworkPortConnectionException(
+                "connection is not allowed: the network port is already connected");
         }
 
         if (status == NetworkPortStatus.FAULT) {
             throw new InvalidNetworkPortConnectionException("connection is not allowed: the network port is faulted");
         }
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public NetworkPortType getType() {
-        return type;
-    }
-
-    public NetworkPortStatus getStatus() {
-        return status;
     }
 }
