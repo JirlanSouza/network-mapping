@@ -2,9 +2,11 @@ package com.networkMapping.installationLocation.domain.entities;
 
 import com.networkMapping.installationLocation.domain.exceptions.InvalidSubAreaIdException;
 import com.networkMapping.installationLocation.domain.valueObjects.LocationName;
+import lombok.Getter;
 
 import java.util.UUID;
 
+@Getter
 public class SubArea {
     private final UUID id;
     private LocationName name;
@@ -25,23 +27,11 @@ public class SubArea {
         this.parentId = parentId;
     }
 
-    public UUID getId() {
-        return id;
-    }
-
     public String getName() {
         return name.value();
     }
 
     public void setName(String name) {
         this.name = new LocationName(name);
-    }
-
-    public UUID getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(UUID parentId) {
-        this.parentId = parentId;
     }
 }
